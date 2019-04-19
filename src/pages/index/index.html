@@ -69,6 +69,7 @@
           <span class="lineblock-font">最热商品推荐</span>
         </div>
       </div>
+    <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
       <div class="hot-goods js-waterfull-wrap" data-src="">
         <ul class="js-list js-lazy" data-src="">
           <li v-for="list in lists" :key="list.id">
@@ -88,6 +89,7 @@
         </ul>
         <div class="loading-more"><span></span></div>
       </div>
+      <mt-loadmore>
       <div class="js-show-find category-guid" style="display: none;"></div>
     </div>
   </div>
