@@ -4,12 +4,13 @@ import './index.css'
 import Vue from 'vue'
 import axios from 'axios'
 import url from 'js/api.js'
+import Foot from 'components/Foot.vue'
 import { InfiniteScroll } from 'mint-ui';
 
 Vue.use(InfiniteScroll);
 
 new Vue({
-  el: '.container',
+  el: '.vue-el',
   data: {
     lists: null,
     loading: false, //是否可以触发 falae为可以被触发
@@ -32,5 +33,8 @@ new Vue({
       })
       
     }
+  },
+  components: {
+    Foot   //Foot： Foot简写
   }
 })
