@@ -12,24 +12,25 @@ new Vue({
   el: '.container',
   data: {
     lists: null,
-    loading: false //是否可以加载  false为可以请求加载数据
+    loading: false, //是否可以触发 falae为可以被触发
   },
   created(){
     this.getLists()
   },
   methods: {
     getLists() {
-      this.loading = true
-
-      axios.post(url.hotLists).then(res=>{
-        this.lists = res.data.lists
+      this.loading = true  //为true时无限滚动不会被触发 
+      axios.get(url.hotLists).then(res=>{
+        console.log(res.data.lists)
         if(this.lists){
           this.lists = this.lists.concat(res.data.lists)
         }else{
           this.lists = res.data.lists
         }
         this.loading = false
+      
       })
+      
     }
   }
 })

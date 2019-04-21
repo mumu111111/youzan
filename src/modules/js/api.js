@@ -2,7 +2,7 @@ let url= {
     hotLists : '/index/hotLists'
 }
 
-let host = 'http://rap2api.taobao.org/app/mock/7058'
+let host = 'http://rap2api.taobao.org/app/mock/166022'
 
 for(let key in url){
     if(url.hasOwnProperty(key)){
