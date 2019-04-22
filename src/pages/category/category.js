@@ -8,7 +8,7 @@ import url from 'js/api.js'
 import Foot from 'components/Foot.vue'
 
 new Vue({
-    el: '#app',
+    el: '.container',
     data: {
         topLists: null,
         subData: null,
@@ -30,6 +30,7 @@ new Vue({
                 console.log('top',res.data.lists)
                 
                 this.topLists = res.data.lists
+
             })
             // .catch((res)=>{
 
@@ -53,6 +54,7 @@ new Vue({
                 console.log('rank',res.data.data)
                 
                 this.rankData = res.data.data
+                console.log('hotGoods',res.data.data.hotGoods)
             })
         }
     },
