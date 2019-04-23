@@ -6,6 +6,7 @@ import axios from 'axios'
 import url from 'js/api.js'
 
 import Foot from 'components/Foot.vue'
+import mixin from 'js/mixin.js'
 
 new Vue({
     el: '.container',
@@ -46,7 +47,6 @@ new Vue({
                     console.log('sub',res.data.data)
                     this.subData = res.data.data
                 })
-    
             }
         },
         getRank(){
@@ -56,21 +56,14 @@ new Vue({
                 this.rankData = res.data.data
                 console.log('hotGoods',res.data.data.hotGoods)
             })
+        },
+        toSearch(list) {
+            location.href=`search.html?keyword=${list.name}&id=${list.id}`
         }
     },
     
     components: {
         Foot
     },
-    filters:{
-        number(price) { //price是mock 属性
-            let priceStr= ''+ price  //转换成字符串
-            if(priceStr.indexOf('.') > -1){
-                let arr = priceStr.split('.')
-                return arr[0] + '.' +(arr[1]+'0').substr(0,2) //有小数 并有一位或两位时，都加‘0’，再取位数
-            }else{
-                return priceStr + '.00'
-            }
-        }
-    }
+    mixins: [mixin]
 })
