@@ -4,7 +4,8 @@ let url= {
     topList: '/category/topList',
     subList: '/category/subList',
     rankList:'/category/rank',
-    searchList: '/search/list'
+    searchList: '/search/list',
+    details: '/goods/details'
 }
 
 let host = 'http://rap2api.taobao.org/app/mock/7058'
