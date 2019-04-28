@@ -23,18 +23,22 @@
       detailTab,
       tabIndex: 0,
       dealLists: null,
-      swipeList: null,
+      swipeList: [],
       showSku: false,
-      skuType:  1
+      skuType:  1,
+      skuNum: 1,
+      isAddCart: false,
+      showAddMessage: false
     },
     created() {
       this.getDetails()
     },
     methods: {
       getDetails() {
-        axios.get(url.details, {id}).then(res=>{
+        axios(url.details, {id}).then(res=>{
           //先处理原始数据，在赋值
           let data = res.data.data
+          console.log('details',data)
           data.skuList.forEach(sku=>{
             let lists = []
             sku.lists.forEach(item=>{
@@ -46,12 +50,17 @@
             sku.lists = lists
           })
           this.details = data
+          console.log('detals', data)
           //轮播组件需要的图片
           this.details.imgs.forEach(item=>{
+          console.log('item', this.swipeList)
+          
             this.swipeList.push({
               clickUrl: '',
-              image: item
+              img: item
             })
+            console.log('swiperlis', this.swipeList)
+            
           })
         })
       },
@@ -63,10 +72,10 @@
       },
       getDeal() {
         axios.post(url.deal, {id}).then(res=>{
-          this.dealLists = res.data.data.lists
+          this.dealLists = res.data.lists
         })
       },
-      chooseSku(type) {
+      chooseSku(type) {//3个地方可触发后，显示加入购物车弹框
         this.showSku = true
         this.skuType = type
       },
@@ -78,12 +87,36 @@
             cur.active = i===index
           })
         }
-      } 
+      },
+      changeSkuNum(num) {
+        if(num <0 && this.skuNum ===1) return 
+        this.skuNum += num
+      },
+      addCart() {
+        axios.post(url.cartAdd, {id, number: this.skuNum}).then(res=>{
+          if(res.data.status === 200){
+            this.isAddCart = true
+            this.showAddMessage = true
+            this.showSku = false
+            setTimeout(()=>{
+              this.showAddMessage = false
+            },1000)
+          }
+        })
+      }
     },
 
 
     components: {
       Swipe
+    },
+    watch: {
+      showSku(val) {
+        document.body.style.overflow = val ? 'hidden' : 'auto'
+        document.body.style.height = val ? '100%' : 'auto'
+        document.querySelector('html').style.overflow = val ? 'hidden' : 'auto'
+        document.querySelector('html').style.height = val ? '100%' : 'auto'
+      }
     },
     mixins: [mixin]
 

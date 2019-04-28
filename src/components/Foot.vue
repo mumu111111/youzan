@@ -5,7 +5,7 @@
         <li><a href="category.html"><i class="icon-category"></i><div>分类</div></a></li>
         <li><a href="https://h5.youzan.com/v2/trade/cart?f_platform=yzapp&amp;source=yzapp"><i class="icon-cart"></i><div>购物车</div></a></li>
         <li><a href="https://h5.youzan.com/v2/buyer/member"><i class="icon-user"></i><div>我</div></a></li> -->
-        <li :class="{active: index===curIndex}" v-for="(list,index) in navConfig" @click="changeNav(list)">
+        <li :class="{active: index===curIndex}" v-for="(list,index) in navConfig" @click="changeNav(list,index)">
           <a><i :class="list.icon"></i><div>{{list.name}}</div></a>
         </li>
       </ul>
