@@ -27,9 +27,9 @@
           <!---->
           <!---->
           <div class="js-shop-list shop-list">
-            <div class="block block-order block-cart">
+            <div class="block block-order block-cart" v-for="{list,index} in lists">
               <div class="header">
-                <div class="select-group js-select-group"><span class="check checked"></span></div> <a class="shop-title"><i class="custom-store-img">店铺：</i>寻找田野</a>
+                <div class="select-group js-select-group"><span class="check checked"></span></div> <a class="shop-title"><i class="custom-store-img">店铺：</i>{{list.shopTitle}}</a>
                 <a href="javascript:;" data-type="cart" class="j-edit-list pull-right c-blue font-size-12 edit-list">
                   <!---->
                   编辑
@@ -38,20 +38,20 @@
               <!---->
               <div>
                 <ul class="js-list block block-list block-list-cart border-0">
-                  <li class="block-item block-item-cart editing">
+                  <li class="block-item block-item-cart editing" v-for="(good,index) in list.goodsList">
                     <div>
                       <div class="check-container"><span class="check"></span></div>
                       <div class="name-card clearfix">
-                        <a href="https://h5.youzan.com/v2/showcase/goods?alias=2oivacpjh2ex0" class="thumb js-goods-link"><img data-src="https://img.yzcdn.cn/upload_files/2017/07/04/Fqp4EItsHaclmGQPBoMkR1qKmKGi.jpg!200x200.jpg" class="js-lazy" src="https://img.yzcdn.cn/upload_files/2017/07/04/Fqp4EItsHaclmGQPBoMkR1qKmKGi.jpg?imageView2/2/w/200/h/200/q/75/format/webp">
+                        <a href="https://h5.youzan.com/v2/showcase/goods?alias=2oivacpjh2ex0" class="thumb js-goods-link"><img :data-src="good.image" class="js-lazy" :src="good.image">
                           <!---->
                         </a>
                         <div class="detail"><a href="https://h5.youzan.com/v2/showcase/goods?alias=2oivacpjh2ex0" class="js-goods-link"><h3 class="title js-ellipsis"><i>江苏盱眙“花雕冰醉”小龙虾  口味独特 清甜爽口</i></h3></a>
                           <p class="sku ellipsis">
-                            7-9钱，总重1600g 净虾800g
+                            {{good.sku}}
                           </p>
                           <!-- 显示状态 -->
                           <div class="num" style="display: none;">
-                            ×<span class="num-txt">2</span>
+                            ×<span class="num-txt">{{good.number}}</span>
                             <!---->
                           </div>
                           <!-- 编辑状态 -->
@@ -59,14 +59,14 @@
                             <!---->
                             <div class="quantity">
                               <button type="button" class="minus disabled"></button>
-                              <input type="text" pattern="[0-9]*" class="txt" value="1">
+                              <input type="text" pattern="[0-9]*" class="txt" v-model="good.number">
                               <button type="button" class="plus "></button>
                               <div class="response-area response-area-minus"></div>
                               <div class="response-area response-area-plus"></div>
                             </div>
                           </div>
                           <div class="price c-orange">
-                            ¥<span>189.00 </span></div>
+                            ¥<span>{{good.price | currency}} </span></div>
                         </div>
                         <div class="error-box"></div>
                       </div>
@@ -126,7 +126,7 @@
                             <!---->
                           </div>
                           <div class="price c-orange">
-                            ¥<span>12.99 </span></div>
+                            ¥<span>{{good.price | currency}}</span></div>
                         </div>
                         <div class="error-box"></div>
                       </div>
@@ -195,12 +195,12 @@
       </div>
     </div>
   </div>
-  <div class="footer" style="min-height: 86px;">
+  <!-- <div class="footer" style="min-height: 86px;">
     <div class="copyright">
       <div class="ft-copyright " style="background-image: url(https://img.yzcdn.cn/upload_files/2016/11/15/147918630760182374.png);">
         <a class="yz-logo" href="https://www.youzan.com/?from_source=support_logo">有赞提供技术支持</a> </div>
     </div>
-  </div>
+  </div> -->
 </body>
 
 </html>
