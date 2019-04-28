@@ -23,7 +23,9 @@
       detailTab,
       tabIndex: 0,
       dealLists: null,
-      swipeList: null
+      swipeList: null,
+      showSku: false,
+      skuType:  1
     },
     created() {
       this.getDetails()
@@ -63,8 +65,23 @@
         axios.post(url.deal, {id}).then(res=>{
           this.dealLists = res.data.data.lists
         })
+      },
+      chooseSku(type) {
+        this.showSku = true
+        this.skuType = type
+      },
+      chooseTag(item,index,arr) {
+        if(item.active){
+          item.active = false
+        }else{
+          arr.forEach((cur, i)=>{
+            cur.active = i===index
+          })
+        }
       } 
     },
+
+
     components: {
       Swipe
     },
